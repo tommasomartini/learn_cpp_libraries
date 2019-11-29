@@ -24,3 +24,11 @@ Compile with:
 g++ main.cpp greet.cpp -o main
 ```
 
+# Exercise 4
+The function greet() is declared in a .hpp file and defined in a .cpp file.
+Both files are in a different folder than the main.
+Compile with:
+```
+g++ main.cpp ../greet/greet.cpp -o main -I ../greet
+```
+
