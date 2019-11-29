@@ -81,4 +81,12 @@ Here we are doing multiple things:
    1. `-L ./lib/` tells the compiler where the static library is;
    1. `-lgreet` tells the linker to statically link a library called "libgreet.a".
 
+# Exercise 7
+Compile and link greet as a dynamic library.
+
+1. Compile greet to an object file. We need the `-fPIC` directive to output a Position Independent Code, which is necessary to dynamically link: `g++ -c -fPIC ./src/greet.cpp -I ./include/ -o ./bin/greet.o`
+1. Turn the greet.o object file into a shared library. Also in this case the output must start with "lib", but it will end in ".so" (for Shared Object): `g++ -shared ./bin/greet.o -o ./lib/libgreet.so`
+1. Compile the main: `g++ ./src/main.cpp -I ./include/ -L ./lib/ -l greet -o ./bin/main`
+1. The loader must know where the library to load and link is. Therefore the folder containing the library must be put into the `LD_LIBRARY_PATH` environment variable: `export LD_LIBRARY_PATH=./lib:$LD_LIBRARY_PATH`
+1. Now the main can be run: `./bin/main`
 
