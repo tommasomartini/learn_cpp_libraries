@@ -70,4 +70,23 @@ The g++ command automatically invokes the linker, usually ld. To see how the lin
 ## Loading
 When you actually run the binary, an `execve` system call is invoken, which loads the binary in memory. At this point dynamically linked libraries are also loaded in memory.
 
+# Exercise 6
+Compile and link greet as a static library.
+1. Compile greet to an object file (format .o). Since its header is in a different folder, we need to use `-I` to tell the compiler where to find it: ```
+g++ -c src/greet.cpp -o ./bin/greet.o -I ./include
+```
+
+1. Turn the greet.o object file into an archive, that is a static library, using `ar`: ```
+ar rcs lib/libgreet.a bin/greet.o
+```
+Note that the archive we create must start with "lib" and end in ".a" for the linker to find it.
+
+1. Compile the main file: ```
+g++ src/main.cpp -I ./include/ -L ./lib/ -lgreet -o ./bin/main
+```
+Here we are doing multiple things:
+   1. `-I ./include/` tells the compiler where to find the header files (only `greet.hpp` in this case);
+   1. `-L ./lib/` tells the compiler where the static library is;
+   1. `-lgreet` tells the linker to statically link a library called "libgreet.a".
+
 
