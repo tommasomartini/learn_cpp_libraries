@@ -90,3 +90,7 @@ Compile and link greet as a dynamic library.
 1. The loader must know where the library to load and link is. Therefore the folder containing the library must be put into the `LD_LIBRARY_PATH` environment variable: `export LD_LIBRARY_PATH=./lib:$LD_LIBRARY_PATH`
 1. Now the main can be run: `./bin/main`
 
+# Exercise 8
+Compile with Bazel, when greet is in the same folder as the main.
+
+
